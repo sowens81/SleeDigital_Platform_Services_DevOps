@@ -8,16 +8,8 @@ parameters:
 
 steps:
 
-- task: DotNetCoreCLI@2
-  displayName: UnitTest .Net Project
-  inputs:
-    command: 'test'
-    projects: "${{ parameters.solutionDirectory }}/**/*.UnitTests.csproj"
-    testRunTitle: 'Unit Tests'
-    arguments: /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=$(Build.SourcesDirectory)/coverage/
-
 - task: Bash@3
-  displayName: Move Code Coverage Tests
+  displayName: UnitTest .Net Project
   inputs:
     targetType: inline
     script: |
@@ -31,7 +23,7 @@ steps:
   inputs:
     targetType: inline
     script: |
-      mv $(BUILD_SOURCE)\coverage\coverage.opencover.xml $(AGENT_TEMP)\coverage.opencover.xml
+      cp ${BUILD_SOURCE}/coverage/coverage.opencover.xml $(AGENT_TEMP)/coverage.opencover.xml
   env: 
     BUILD_SOURCE: $(Build.SourcesDirectory)
     AGENT_TEMP: $(Agent.TempDirectory)
