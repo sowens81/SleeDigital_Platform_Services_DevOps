@@ -19,4 +19,5 @@ steps:
     projectKey: ${{ parameters.projectKey }}
     projectName: ${{ parameters.projectName }}
     extraProperties: |
-      sonar.verbose=truesonar.cs.opencover.reportsPaths=$(Agent.TempDirectory)/coverage.opencover.xml
+      sonar.verbose=true
+      sonar.cs.opencover.reportsPaths=$(Agent.TempDirectory)/coverage.opencover.xml
