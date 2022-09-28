@@ -26,7 +26,7 @@ stages:
           parameters: 
             developmentFrameworkVersion: ${{ parameters.developmentFrameworkVersion }}
         
-        - template: ../steps/dotnet-sonarcloud.yaml
+        - template: ../steps/dotnet-sonarcloud-prepare.yaml
           parameters: 
             serviceConnection: ${{ parameters.sonarcloud.serviceConnection }}
             organization: ${{ parameters.sonarcloud.organization }}
