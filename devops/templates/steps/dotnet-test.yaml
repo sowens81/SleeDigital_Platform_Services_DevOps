@@ -13,19 +13,5 @@ steps:
   inputs:
     command: 'test'
     projects: "${{ parameters.solutionDirectory }}/**/*.UnitTests.csproj"
-    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=$(Build.SourcesDirectory)/coverage/'
+    arguments: '--configuration ${{ parameters.buildConfiguration }}'
     testRunTitle: 'Unit Tests'
-
-- task: Bash@3
-  displayName: Move Code Coverage Tests
-  inputs:
-    targetType: inline
-    script: |
-      ls ${BUILD_SOURCE}/coverage/
-      ls ${BUILD_SOURCE}
-      ls ${AGENT_TEMP}
-  env:
-    BUILD_SOURCE: "$(Build.SourcesDirectory)"
-    AGENT_TEMP: "$(Agent.TempDirectory)"
-    # BUILD_SOURCE: "$(Build.SourcesDirectory)/coverage/coverage.opencover.xml"
-    # AGENT_TEMP: "$(Agent.TempDirectory)/coverage.opencover.xml

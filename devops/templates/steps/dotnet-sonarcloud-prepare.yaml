@@ -18,6 +18,3 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: ${{ parameters.projectKey }}
     projectName: ${{ parameters.projectName }}
-    extraProperties: |
-      sonar.verbose=true
-      sonar.cs.opencover.reportsPaths=$(Agent.TempDirectory)/coverage.opencover.xml

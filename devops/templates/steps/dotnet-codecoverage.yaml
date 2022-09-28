@@ -1,6 +1,8 @@
 parameters:
     - name: solutionDirectory
-      type: object
+      type: string
+    - name: buildConfiguration
+      type: string
 
 steps:
   
@@ -9,6 +11,6 @@ steps:
   inputs:
     command: 'test'
     projects: "${{ parameters.solutionDirectory }}/**/*.UnitTests.csproj"
-    testRunTitle: 'Unit Tests'
-    arguments: '--collect "Code coverage'
+    testRunTitle: 'Unit Tests - Publish Coverage'
+    arguments: '--configuration ${{ parameters.buildConfiguration }} --collect "Code coverage'
     publishTestResults: true
