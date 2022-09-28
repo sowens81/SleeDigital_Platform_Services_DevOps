@@ -18,7 +18,7 @@ extends:
   template: ../types/cicd-libraries.yaml
   parameters:
     solutionType:  dotnet #
-    agentPool: 'ubuntu-latest'
+    agentPool: 'windows-latest'
     settings:
       solutionName:  Example.Solution #
       solutionDirectory: src/sharedlibraries/nuget/Example.Solution 
