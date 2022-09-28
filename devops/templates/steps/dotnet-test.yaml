@@ -23,7 +23,7 @@ steps:
   inputs:
     targetType: inline
     script: |
-      cp ${BUILD_SOURCE}/coverage/coverage.opencover.xml $(AGENT_TEMP)/coverage.opencover.xml
+      cp ${BUILD_SOURCE} ${AGENT_TEMP}
   env: 
-    BUILD_SOURCE: $(Build.SourcesDirectory)
-    AGENT_TEMP: $(Agent.TempDirectory)
+    BUILD_SOURCE: "$(Build.SourcesDirectory)/coverage/coverage.opencover.xml"
+    AGENT_TEMP: "$(Agent.TempDirectory)/coverage.opencover.xml"
