@@ -13,7 +13,7 @@ steps:
   inputs:
     command: 'test'
     projects: "${{ parameters.solutionDirectory }}/**/*.UnitTests.csproj"
-    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput= $(Build.SourcesDirectory)/coverage/'
+    arguments: '/p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=$(Build.SourcesDirectory)/coverage/'
     testRunTitle: 'Unit Tests'
 
 - task: Bash@3
