@@ -19,6 +19,4 @@ steps:
     projectKey: ${{ parameters.projectKey }}
     projectName: ${{ parameters.projectName }}
     extraProperties: |
-      sonar.exclusions="/bin//,/obj//,/Migrations/,/*.dll"
-      sonar.coverage.exclusions="test/"
-      sonar.verbose=true
+      sonar.verbose=truesonar.cs.opencover.reportsPaths=${{ Agent.TempDirectory }}/coverage.opencover.xml

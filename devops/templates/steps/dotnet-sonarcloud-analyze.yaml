@@ -7,3 +7,5 @@ steps:
   displayName: Publish SonarCloud Output
   inputs:
     pollingTimeoutSec: '300'
+
+

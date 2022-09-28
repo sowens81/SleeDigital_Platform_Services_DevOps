@@ -38,14 +38,21 @@ stages:
             solutionName: ${{ parameters.solutionName }}
             solutionDirectory: ${{ parameters.solutionDirectory }}
             buildConfiguration: ${{ parameters.buildConfiguration }}
+
+        - template: ../steps/dotnet-test.yaml
+          parameters: 
+            solutionName: ${{ parameters.solutionName }}
+            solutionDirectory: ${{ parameters.solutionDirectory }}
+            buildConfiguration: ${{ parameters.buildConfiguration }}
+
+        - ${{ if and(eq(variables['Build.SourceBranchName'], 'trunk'), variables['Build.Reason'], 'IndividualCI') }}:
+          - template: ../steps/dotnet-sonarcloud-analyze.yaml
         
         - ${{ if and(eq(variables['Build.SourceBranchName'], 'trunk'), variables['Build.Reason'], 'IndividualCI') }}:
           - template: ../steps/dotnet-codecoverage.yaml
             parameters: 
               solutionDirectory: ${{ parameters.solutionDirectory }}
-        
-        - ${{ if and(eq(variables['Build.SourceBranchName'], 'trunk'), variables['Build.Reason'], 'IndividualCI') }}:
-          - template: ../steps/dotnet-sonarcloud-analyze.yaml
+
 
         
               

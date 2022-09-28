@@ -22,11 +22,4 @@ steps:
     command: 'build'
     projects: "${{ parameters.solutionDirectory }}/**/*.csproj"
     arguments: "--configuration ${{ parameters.buildConfiguration }}"
-  
 
-- task: DotNetCoreCLI@2
-  displayName: UnitTest .Net Project
-  inputs:
-    command: 'test'
-    projects: "${{ parameters.solutionDirectory }}/**/*.UnitTests.csproj"
-    testRunTitle: 'Unit Tests'
