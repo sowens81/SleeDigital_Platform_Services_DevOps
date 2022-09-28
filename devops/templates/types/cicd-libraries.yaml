@@ -16,12 +16,3 @@ stages:
         developmentFrameworkVersion: ${{ parameters.settings.developmentFrameworkVersion }}
         buildConfiguration: ${{ parameters.settings.buildConfiguration }}
         sonarcloud: ${{ parameters.settings.sonarcloud }}
-  
-  - ${{ if eq(parameters['solutionType'], 'nodejs' ) }}:
-    - template: ../stages/build-nodejs-packages.yaml
-      parameters:
-        agentPool: ${{ parameters.agentPool }}
-        solutionName: ${{ parameters.settings.solutionName }}
-        solutionDirectory: ${{ parameters.settings.solutionDirectory }}
-        developmentFrameworkVersion: ${{ parameters.settings.developmentFrameworkVersion }}
-        buildConfiguration: ${{ parameters.settings.buildConfiguration }}

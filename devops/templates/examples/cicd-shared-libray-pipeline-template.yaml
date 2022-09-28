@@ -9,7 +9,7 @@ trigger:
 pr:
   branches:
     include:
-    - Main
+    - trunk
 
 variables:
 - group: global-secrets
@@ -28,4 +28,4 @@ extends:
         serviceConnection: sonarcloud_sleedigital_platform_services_devops
         orginisation: sowens81
         projectKey: sowens81_SleeDigital_Platform_Services_DevOps
-        host: https://sonarcloud.io
+        projectName: SleeDigital_Platform_Services_DevOps
