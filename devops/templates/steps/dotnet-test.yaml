@@ -12,6 +12,6 @@ steps:
   displayName: UnitTest .Net Project
   inputs:
     command: 'test'
-    projects: "${{ parameters.solutionDirectory }}/**/*.UnitTests.csproj"
-    arguments: '--configuration ${{ parameters.buildConfiguration }}'
+    projects: ${{ parameters.solutionDirectory }}/**/*.UnitTests.csproj
+    arguments: --configuration ${{ parameters.buildConfiguration }} --collect "Code Coverage"
     testRunTitle: 'Unit Tests'
