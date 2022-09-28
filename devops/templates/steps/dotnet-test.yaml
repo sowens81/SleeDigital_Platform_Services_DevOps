@@ -31,7 +31,7 @@ steps:
   inputs:
     targetType: inline
     script: |
-      cp $(BUILD_SOURCE)\coverage\coverage.opencover.xml $(AGENT_TEMP)\coverage.opencover.xml
+      mv $(BUILD_SOURCE)\coverage\coverage.opencover.xml $(AGENT_TEMP)\coverage.opencover.xml
   env: 
     BUILD_SOURCE: $(Build.SourcesDirectory)
     AGENT_TEMP: $(Agent.TempDirectory)
