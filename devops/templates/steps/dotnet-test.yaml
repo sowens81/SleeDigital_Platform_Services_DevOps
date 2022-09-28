@@ -21,6 +21,16 @@ steps:
   inputs:
     targetType: inline
     script: |
+      dotnet test ${SOLUTION_DIRECTORY} /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=${BUILD_SOURCE}/coverage/
+  env: 
+    BUILD_SOURCE: $(Build.SourcesDirectory)
+    SOLUTION_DIRECTORY: ${{ parameters.solutionDirectory }}
+
+- task: Bash@3
+  displayName: Move Code Coverage Tests
+  inputs:
+    targetType: inline
+    script: |
       cp $(BUILD_SOURCE)\coverage\coverage.opencover.xml $(AGENT_TEMP)\coverage.opencover.xml
   env: 
     BUILD_SOURCE: $(Build.SourcesDirectory)
