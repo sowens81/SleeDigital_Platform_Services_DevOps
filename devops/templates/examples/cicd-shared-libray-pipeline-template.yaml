@@ -1,0 +1,31 @@
+name: $(date:yyyyMMdd)$(rev:.r)
+
+trigger:
+  branches:
+    include:
+    - Main
+    - feature/*
+
+pr:
+  branches:
+    include:
+    - Main
+
+variables:
+- group: global-secrets
+
+extends:
+  template: ../types/cicd-libraries.yaml
+  parameters:
+    solutionType:  dotnet #
+    agentPool: 'ubuntu-latest'
+    settings:
+      solutionName:  Example.Solution #
+      solutionDirectory: src/sharedlibraries/nuget/Example.Solution 
+      developmentFrameworkVersion: 6.0.x #
+      buildConfiguration: Release
+      sonarcloud:
+        serviceConnection: sonarcloud_sleedigital_platform_services_devops
+        orginisation: sowens81
+        projectKey: sowens81_SleeDigital_Platform_Services_DevOps
+        host: https://sonarcloud.io

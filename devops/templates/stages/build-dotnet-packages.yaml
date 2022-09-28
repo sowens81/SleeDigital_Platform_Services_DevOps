@@ -1,0 +1,51 @@
+parameters:
+    - name: agentPool
+      type: string
+    - name: solutionName
+      type: string
+    - name: solutionDirectory
+      type: string
+    - name: developmentFrameworkVersion
+      type: string
+    - name: buildConfiguration
+      type: string
+    - name: sonarcloud
+      type: object
+
+stages:
+  - stage: build
+    jobs:
+      - job: Build_DotNet_Package_Job
+        displayName: Build .Net Package
+        ${{ if ne(parameters.agentPool, 'null')}}:
+          pool:
+            vmImage: ${{ parameters.agentPool }}
+        steps:
+
+        - template: ../steps/dotnet-framework.yaml
+          parameters: 
+            developmentFrameworkVersion: ${{ parameters.developmentFrameworkVersion }}
+        
+        - template: ../steps/dotnet-build.yaml
+          parameters: 
+            solutionName: ${{ parameters.solutionName }}
+            solutionDirectory: ${{ parameters.solutionDirectory }}
+            buildConfiguration: ${{ parameters.buildConfiguration }}
+        
+        - ${{ if and(eq(variables['Build.SourceBranchName'], 'Main'), variables['Build.Reason'], 'IndividualCI') }}:
+          - template: ../steps/dotnet-codecoverage.yaml
+            parameters: 
+              solutionDirectory: ${{ parameters.solutionDirectory }}
+        
+        - ${{ if and(eq(variables['Build.SourceBranchName'], 'Main'), variables['Build.Reason'], 'IndividualCI') }}:
+          - template: ../steps/dotnet-sonarcloud.yaml
+            parameters: 
+              solutionDirectory: ${{ parameters.solutionDirectory }}
+              orginisation: ${{ parameters.sonarcloud.orginisation }}
+              projectKey: ${{ parameters.sonarcloud.projectKey }}
+              host: ${{ parameters.sonarcloud.host }}
+              buildConfiguration: ${{ parameters.buildConfiguration }}
+              
+
+
+              

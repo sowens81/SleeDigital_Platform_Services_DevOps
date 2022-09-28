@@ -1,0 +1,24 @@
+trigger:
+  branches:
+    include:
+    - Main
+    - feature/*
+
+pr:
+  branches:
+    include:
+    - Main
+
+extends:
+  template: devops/templates/types/cicd-libraries.yaml
+  parameters:
+    settings:
+      solutionType:  dotnet #
+      solutionName:  Example.Solution #
+      developmentFrameworkVersion: 6.0.x #
+      agentPool: ${{ variables.agentPool}}
+    environments:
+      - dev
+      - production 
+
+

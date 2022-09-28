@@ -1,0 +1,14 @@
+parameters:
+    - name: solutionDirectory
+      type: object
+
+steps:
+  
+- task: DotNetCoreCLI@2
+  displayName: Publish Code Coverage
+  inputs:
+    command: 'test'
+    projects: "${{ parameters.solutionDirectory }}/**/*.UnitTests.csproj"
+    testRunTitle: 'Unit Tests'
+    arguments: '--collect "Code coverage'
+    publishTestResults: true
