@@ -11,9 +11,14 @@ parameters:
 steps:
 
 - task: SonarCloudPrepare@1
+  displayName: Configure SonarCloud Project
   inputs:
     SonarCloud: ${{ parameters.serviceConnection }}
     organization: ${{ parameters.organization }}
     scannerMode: 'MSBuild'
     projectKey: ${{ parameters.projectKey }}
     projectName: ${{ parameters.projectName }}
+    extraProperties: |
+      sonar.exclusions="/bin//,/obj//,/Migrations/,/*.dll"
+      sonar.coverage.exclusions="test/"
+      sonar.verbose=true

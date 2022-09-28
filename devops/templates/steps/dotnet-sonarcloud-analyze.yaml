@@ -1,7 +1,9 @@
 steps:
 
 - task: SonarCloudAnalyze@1
+  displayName: Run SonarCloud Analysis
 
 - task: SonarCloudPublish@1
+  displayName: Publish SonarCloud Output
   inputs:
     pollingTimeoutSec: '300'
