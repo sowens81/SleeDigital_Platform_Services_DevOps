@@ -14,6 +14,7 @@ parameters:
 
 stages:
   - stage: build
+    condition: or(contains(variables['Build.SourceBranchName']), 'feature/'), eq(variables['Build.SourceBranchName'], 'trunk'))
     jobs:
       - job: Build_DotNet_Package_Job
         displayName: Build .Net Package
@@ -26,14 +27,12 @@ stages:
           parameters: 
             developmentFrameworkVersion: ${{ parameters.developmentFrameworkVersion }}
 
-        - ${{ if ne(contains('refs/tags/v', variables['Build.SourceBranchName']))) }}:
-          - ${{ if eq(variables['Build.Reason'], 'IndividualCI') }}:
-            - template: ../steps/dotnet-sonarcloud-prepare.yaml
-              parameters: 
-                serviceConnection: ${{ parameters.sonarcloud.serviceConnection }}
-                organization: ${{ parameters.sonarcloud.organization }}
-                projectKey: ${{ parameters.sonarcloud.projectKey }}
-                projectName: ${{ parameters.sonarcloud.projectName }}
+        - template: ../steps/dotnet-sonarcloud-prepare.yaml
+          parameters: 
+            serviceConnection: ${{ parameters.sonarcloud.serviceConnection }}
+            organization: ${{ parameters.sonarcloud.organization }}
+            projectKey: ${{ parameters.sonarcloud.projectKey }}
+            projectName: ${{ parameters.sonarcloud.projectName }}
         
         - template: ../steps/dotnet-build.yaml
           parameters: 
@@ -41,20 +40,11 @@ stages:
             solutionDirectory: ${{ parameters.solutionDirectory }}
             buildConfiguration: ${{ parameters.buildConfiguration }}
 
-        - ${{ if ne(contains('refs/tags/v', variables['Build.SourceBranchName']))) }}:
-          - template: ../steps/dotnet-test.yaml
-            parameters: 
-              solutionName: ${{ parameters.solutionName }}
-              solutionDirectory: ${{ parameters.solutionDirectory }}
-              buildConfiguration: ${{ parameters.buildConfiguration }}
-
-        - ${{ if ne(contains('refs/tags/v', variables['Build.SourceBranchName']))) }}:
-          - template: ../steps/dotnet-sonarcloud-analyze.yaml
-        
-        
-
-        
-/devops/templates/stages/build-dotnet-packages.yaml (Line: 43, Col: 11): Unexpected symbol: ')'. Located at position 67 within expression: and(ne(contains(variables['Build.SourceBranchName'],'refs/tags/v')), eq(variables['Build.Reason'], 'IndividualCI')). For more help, refer to https://go.microsoft.com/fwlink/?linkid=842996
+        - template: ../steps/dotnet-test.yaml
+          parameters: 
+            solutionName: ${{ parameters.solutionName }}
+            solutionDirectory: ${{ parameters.solutionDirectory }}
+            buildConfiguration: ${{ parameters.buildConfiguration }}
 
 
-              
+        - template: ../steps/dotnet-sonarcloud-analyze.yaml
