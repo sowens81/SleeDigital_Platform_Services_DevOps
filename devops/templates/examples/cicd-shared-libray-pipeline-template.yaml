@@ -5,6 +5,9 @@ trigger:
     include:
     - trunk
     - feature/*
+  tags:
+    include:
+    - 'v*'
 
 pr:
   branches:
@@ -29,3 +32,9 @@ extends:
         organization: sowens81
         projectKey: sowens81_SleeDigital_Platform_Services_DevOps
         projectName: SleeDigital_Platform_Services_DevOps
+      packageDetails:
+        nugetSource: https://api.nuget.org/v3/index.json
+        packageId: SleeDigital.Example.Solution
+        authors: Steve Owens
+        company: Slee Digital
+

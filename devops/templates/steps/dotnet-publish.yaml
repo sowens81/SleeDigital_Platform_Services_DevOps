@@ -1,0 +1,24 @@
+parameters:
+    - name: nugetSource
+      type: string
+    - name: packageId
+      type: string
+
+variables:
+- name: buildVersionId
+  value: "0.0.0"
+
+steps:
+
+- task: PowerShell@2
+  displayName: Extract Build Id
+  inputs:
+    script: |
+      $buildVersion= $env.BUILD_VERSION.Trim("v")
+      echo "##vso[task.setvariable variable=buildVersionId]$buildVersion"
+  env:
+    BUILD_VERSION: $(Build.SourceBranchName)
+
+- script: |
+      dotnet nuget push "$(Build.ArtifactStagingDirectory)/nuget/${{ parameters.packageId }}.$().nupkg" --api-key api --source ${{ parameters.nugetSource }}
+    displayName: "Publish Nuget Package"    

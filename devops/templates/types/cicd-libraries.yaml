@@ -16,3 +16,13 @@ stages:
         developmentFrameworkVersion: ${{ parameters.settings.developmentFrameworkVersion }}
         buildConfiguration: ${{ parameters.settings.buildConfiguration }}
         sonarcloud: ${{ parameters.settings.sonarcloud }}
+  
+  - ${{ if eq(parameters['solutionType'], 'dotnet' ) }}:
+    - template: ../stages/publish-dotnet-packages.yaml
+      parameters:
+        agentPool: ${{ parameters.agentPool }}
+        solutionName: ${{ parameters.settings.solutionName }}
+        solutionDirectory: ${{ parameters.settings.solutionDirectory }}
+        developmentFrameworkVersion: ${{ parameters.settings.developmentFrameworkVersion }}
+        buildConfiguration: ${{ parameters.settings.buildConfiguration }}
+        packageDetails: ${{ parameters.settings.packageDetails }}

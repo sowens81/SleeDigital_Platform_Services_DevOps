@@ -25,13 +25,13 @@ stages:
         - template: ../steps/dotnet-framework.yaml
           parameters: 
             developmentFrameworkVersion: ${{ parameters.developmentFrameworkVersion }}
-        
-        - template: ../steps/dotnet-sonarcloud-prepare.yaml
-          parameters: 
-            serviceConnection: ${{ parameters.sonarcloud.serviceConnection }}
-            organization: ${{ parameters.sonarcloud.organization }}
-            projectKey: ${{ parameters.sonarcloud.projectKey }}
-            projectName: ${{ parameters.sonarcloud.projectName }}
+        - ${{ if and(ne(contains(variables['Build.SourceBranchName']), 'refs/tags/v')), eq(variables['Build.Reason'], 'IndividualCI')) }}:
+          - template: ../steps/dotnet-sonarcloud-prepare.yaml
+            parameters: 
+              serviceConnection: ${{ parameters.sonarcloud.serviceConnection }}
+              organization: ${{ parameters.sonarcloud.organization }}
+              projectKey: ${{ parameters.sonarcloud.projectKey }}
+              projectName: ${{ parameters.sonarcloud.projectName }}
         
         - template: ../steps/dotnet-build.yaml
           parameters: 
@@ -39,22 +39,16 @@ stages:
             solutionDirectory: ${{ parameters.solutionDirectory }}
             buildConfiguration: ${{ parameters.buildConfiguration }}
 
-        - template: ../steps/dotnet-test.yaml
-          parameters: 
-            solutionName: ${{ parameters.solutionName }}
-            solutionDirectory: ${{ parameters.solutionDirectory }}
-            buildConfiguration: ${{ parameters.buildConfiguration }}
-
-        - ${{ if and(eq(variables['Build.SourceBranchName'], 'trunk'), variables['Build.Reason'], 'IndividualCI') }}:
-          - template: ../steps/dotnet-codecoverage.yaml
+        - ${{ if and(ne(contains(variables['Build.SourceBranchName']), 'refs/tags/v')), eq(variables['Build.Reason'], 'IndividualCI')) }}:
+          - template: ../steps/dotnet-test.yaml
             parameters: 
+              solutionName: ${{ parameters.solutionName }}
               solutionDirectory: ${{ parameters.solutionDirectory }}
               buildConfiguration: ${{ parameters.buildConfiguration }}
 
-        - ${{ if and(eq(variables['Build.SourceBranchName'], 'trunk'), variables['Build.Reason'], 'IndividualCI') }}:
+        - ${{ if and(ne(contains(variables['Build.SourceBranchName']), 'refs/tags/v')), eq(variables['Build.Reason'], 'IndividualCI')) }}:
           - template: ../steps/dotnet-sonarcloud-analyze.yaml
         
-
 
 
         
