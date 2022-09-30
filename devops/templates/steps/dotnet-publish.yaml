@@ -20,3 +20,5 @@ steps:
       dotnet nuget push "$(Build.StagingDirectory)/packages/${{ parameters.packageId }}.$(buildVersionId).nupkg" --api-key $(nugetApiKey) --source ${{ parameters.nugetSource }}
       
 # dotnet nuget push "${{ parameters.solutionDirectory }}/${{ parameters.solutionName }}/bin/${{ parameters.buildConfiguration }}/${{ parameters.packageId }}.$(buildVersionId).nupkg" --api-key $(nugetApiKey) --source ${{ parameters.nugetSource }}
+
+D:\a\1\a\packages\Example.Solution.1.0.0.nupkg
