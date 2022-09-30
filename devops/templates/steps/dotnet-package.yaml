@@ -29,6 +29,7 @@ steps:
     script: | 
       $sourceBranchName="$(Build.SourceBranchName)"
       $buildVersion=$sourceBranchName.Trim("release-v")
+      Write-Host $buildVersion
       echo "##vso[task.setvariable variable=buildVersionId]$buildVersion"
     
 - task: DotNetCoreCLI@2
@@ -36,7 +37,7 @@ steps:
   inputs:
     command: 'build'
     projects: "${{ parameters.solutionDirectory }}/${{ parameters.solutionName }}/${{ parameters.solutionName }}.csproj"
-    arguments: --configuration ${{ parameters.buildConfiguration }} /p:PackageId=${{ parameters.packageId }} /p:version=$(buildVersionId) /p:Authors="${{ parameters.authors }}" /p:Company="${{ parameters.company }}"
+    arguments: --configuration ${{ parameters.buildConfiguration }} /p:PackageId=${{ parameters.packageId }} /p:Version=$(buildVersionId) /p:Authors="${{ parameters.authors }}" /p:Company="${{ parameters.company }}"
 
 - task: DotNetCoreCLI@2
   displayName: Pack .Net Project

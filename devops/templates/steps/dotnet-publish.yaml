@@ -13,7 +13,7 @@ parameters:
 steps:
 
 - task: PowerShell@2
-  displayName: "Publish Nuget Package"
+  displayName: "Validate Package Directory"
   inputs:
     targetType: inline
     script: |
