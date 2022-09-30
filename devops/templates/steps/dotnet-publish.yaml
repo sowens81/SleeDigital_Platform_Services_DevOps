@@ -3,6 +3,8 @@ parameters:
       type: string
     - name: packageId
       type: string
+    - name: buildConfiguration
+      type: string
 
 steps:
 
@@ -11,4 +13,4 @@ steps:
   inputs:
     targetType: inline
     script: |
-      dotnet nuget push "$(Build.ArtifactStagingDirectory)/nuget/${{ parameters.packageId }}.$(buildVersionId).nupkg" --api-key $(nugetApiKey) --source ${{ parameters.nugetSource }}
+      dotnet nuget push "${{ parameters.solutionDirectory }}/${{ parameters.solutionName }}/bin/${{ parameters.buildConfiguration }}/${{ parameters.packageId }}.$(buildVersionId).nupkg" --api-key $(nugetApiKey) --source ${{ parameters.nugetSource }}

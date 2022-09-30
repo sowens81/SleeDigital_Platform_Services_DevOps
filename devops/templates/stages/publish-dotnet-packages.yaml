@@ -39,7 +39,8 @@ stages:
         - template: ../steps/dotnet-publish.yaml
           parameters: 
             packageId: ${{ parameters.packageDetails.packageId }}
-            nugetSource: ${{parameters.packageDetails.nugetSource}}   
+            nugetSource: ${{parameters.packageDetails.nugetSource}}
+            buildConfiguration: ${{ parameters.buildConfiguration }}   
 
 
         
