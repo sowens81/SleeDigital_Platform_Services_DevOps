@@ -1,4 +1,10 @@
 parameters:
+    - name: buildConfiguration
+      type: string
+    - name: solutionDirectory
+      type: string
+    - name: solutionName
+      type: string
     - name: nugetSource
       type: string
     - name: packageId

@@ -38,6 +38,8 @@ stages:
         
         - template: ../steps/dotnet-publish.yaml
           parameters: 
+            solutionName: ${{ parameters.solutionName }}
+            solutionDirectory: ${{ parameters.solutionDirectory }}
             packageId: ${{ parameters.packageDetails.packageId }}
             nugetSource: ${{parameters.packageDetails.nugetSource}}
             buildConfiguration: ${{ parameters.buildConfiguration }}   
