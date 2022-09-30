@@ -20,5 +20,5 @@ steps:
     BUILD_VERSION: $(Build.SourceBranchName)
 
 - script: |
-      dotnet nuget push "$(Build.ArtifactStagingDirectory)/nuget/${{ parameters.packageId }}.$().nupkg" --api-key api --source ${{ parameters.nugetSource }}
+      dotnet nuget push "$(Build.ArtifactStagingDirectory)/nuget/${{ parameters.packageId }}.$().nupkg" --api-key $(nugetApiKey) --source ${{ parameters.nugetSource }}
     displayName: "Publish Nuget Package"    
