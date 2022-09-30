@@ -17,4 +17,4 @@ steps:
   inputs:
     targetType: inline
     script: |
-      dotnet nuget push "$(Build.StagingDirectory)/packages/${{ parameters.packageId }}.$(buildVersionId).nupkg" --api-key $(nugetApiKey) --source ${{ parameters.nugetSource }}
+      dotnet nuget push "$(Build.StagingDirectory)/packages/${{ parameters.solutionName }}.$(buildVersionId).nupkg" --api-key $(nugetApiKey) --source ${{ parameters.nugetSource }}
