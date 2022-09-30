@@ -43,5 +43,5 @@ steps:
   inputs:
     command: 'pack'
     projects: "${{ parameters.solutionDirectory }}/${{ parameters.solutionName }}/${{ parameters.solutionName }}.csproj"
-    arguments: "--configuration Release"
+    configuration: ${{ parameters.buildConfiguration }}
     outputDir: "$(Build.ArtifactStagingDirectory)/nuget"
