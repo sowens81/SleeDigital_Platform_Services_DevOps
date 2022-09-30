@@ -26,12 +26,13 @@ steps:
   displayName: Extract Build Id
   inputs:
     targetType: inline
-    script: |
+    script: | 
+      Write-Host $Env.BUILD_VERSION
       $tempVal=$Env.BUILD_VERSION
       $buildVersion= $tempVal.Trim("release-v")
       echo "##vso[task.setvariable variable=buildVersionId]$buildVersion"
   env:
-    BUILD_VERSION: $(Build.SourceBranchName)
+    BUILD_VERSION: "$(Build.SourceBranchName)"
     
 - task: DotNetCoreCLI@2
   displayName: Build & Version .Net Project
