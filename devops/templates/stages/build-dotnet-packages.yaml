@@ -14,7 +14,7 @@ parameters:
 
 stages:
   - stage: build
-    condition: not( contains( variables['Build.SourceBranchName'],'tag') )
+    condition: not( contains( variables['Build.SourceBranchName'],'tags/v') )
     jobs:
       - job: Build_DotNet_Package_Job
         displayName: Build .Net Package

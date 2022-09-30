@@ -14,7 +14,7 @@ parameters:
 
 stages:
   - stage: Publish
-    condition: and(contains(variables['Build.SourceBranchName']), 'refs/tags/v'), eq(variables['Build.Reason'], 'IndividualCI'))
+    condition: and(contains(variables['Build.SourceBranchName'], 'tags/v'), eq(variables['Build.Reason'], 'IndividualCI'))
     jobs:
       - job: Publis_DotNet_Package_Job
         displayName: Publish .Net Package
