@@ -39,10 +39,10 @@ steps:
     projects: "${{ parameters.solutionDirectory }}/${{ parameters.solutionName }}/${{ parameters.solutionName }}.csproj"
     arguments: --configuration "${{ parameters.buildConfiguration }}" /property:PackageId=${{ parameters.packageId }} /property:Version="$(buildVersionId)" /property:Authors="${{ parameters.authors }}" /property:Company="${{ parameters.company }}"
 
-- task: DotNetCoreCLI@2
+
+- task: PowerShell@2
   displayName: Pack .Net Project
   inputs:
-    command: 'pack'
-    projects: "${{ parameters.solutionDirectory }}/${{ parameters.solutionName }}/${{ parameters.solutionName }}.csproj"
-    arguments: --configuration "${{ parameters.buildConfiguration }}" /property:PackageId=${{ parameters.packageId }} /property:Version="$(buildVersionId)" /property:Authors="${{ parameters.authors }}" /property:Company="${{ parameters.company }}"
-    outputDir: $(Build.StagingDirectory)/packages/"
+    targetType: inline
+    script: |
+      dotnet pack ${{ parameters.solutionDirectory }}/${{ parameters.solutionName }}/${{ parameters.solutionName }}.csproj" --configuration "${{ parameters.buildConfiguration }}" /property:PackageId=${{ parameters.packageId }} /property:Version="$(buildVersionId)" /property:Authors="${{ parameters.authors }}" /property:Company="${{ parameters.company }}" -o "$(Build.StagingDirectory)/packages/"
