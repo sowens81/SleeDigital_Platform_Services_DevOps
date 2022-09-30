@@ -35,14 +35,11 @@ stages:
             packageId: ${{ parameters.packageDetails.packageId }}
             authors: ${{ parameters.packageDetails.authors }}
             company: ${{ parameters.packageDetails.company }}
-
-
-         - template: ../steps/dotnet-publish.yaml
+        
+        - template: ../steps/dotnet-publish.yaml
           parameters: 
             packageId: ${{ parameters.packageDetails.packageId }}
-            nugetSource: ${{parameters.packageDetails.nugetSource}}
-          
-            
+            nugetSource: ${{parameters.packageDetails.nugetSource}}   
 
 
         
