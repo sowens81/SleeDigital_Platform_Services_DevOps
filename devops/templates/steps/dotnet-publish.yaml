@@ -4,10 +4,6 @@ parameters:
     - name: packageId
       type: string
 
-variables:
-- name: buildVersionId
-  value: "0.0.0"
-
 steps:
 
 - task: PowerShell@2
@@ -20,5 +16,5 @@ steps:
     BUILD_VERSION: $(Build.SourceBranchName)
 
 - script: |
-      dotnet nuget push "$(Build.ArtifactStagingDirectory)/nuget/${{ parameters.packageId }}.$().nupkg" --api-key $(nugetApiKey) --source ${{ parameters.nugetSource }}
+      dotnet nuget push "$(Build.ArtifactStagingDirectory)/nuget/${{ parameters.packageId }}.$(buildVersionId).nupkg" --api-key $(nugetApiKey) --source ${{ parameters.nugetSource }}
     displayName: "Publish Nuget Package"    

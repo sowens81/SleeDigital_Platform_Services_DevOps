@@ -12,10 +12,6 @@ parameters:
     - name: company
       type: string
 
-variables:
-- name: buildVersionId
-  value: "0.0.0"
-
 steps:
 
 - task: DotNetCoreCLI@2
