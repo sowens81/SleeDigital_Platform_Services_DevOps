@@ -17,4 +17,12 @@ steps:
   inputs:
     targetType: inline
     script: |
+      Set-Location -Path "$(Build.StagingDirectory)/packages"
+      ls
+
+- task: PowerShell@2
+  displayName: "Publish Nuget Package"
+  inputs:
+    targetType: inline
+    script: |
       dotnet nuget push "$(Build.StagingDirectory)/packages/${{ parameters.solutionName }}.$(buildVersionId).nupkg" --api-key $(nugetApiKey) --source ${{ parameters.nugetSource }}
