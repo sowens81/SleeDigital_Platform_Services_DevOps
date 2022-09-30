@@ -14,7 +14,7 @@ parameters:
 
 stages:
   - stage: build
-    condition: or(eq(variables['Build.SourceBranchName']),'feature/*'),eq(variables['Build.SourceBranchName'],'trunk'))
+    condition: not(contains(variables['Build.SourceBranchName']),'tag'))
     jobs:
       - job: Build_DotNet_Package_Job
         displayName: Build .Net Package
