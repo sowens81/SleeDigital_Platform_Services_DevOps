@@ -11,7 +11,7 @@ steps:
   inputs:
     targetType: inline
     script: |
-      dotnet nuget push "${env.STAGING_DIRECTORY}/nuget/${env.PACKAGE_ID}.${env.BUILD_VERSION}.nupkg" --api-key ${env.API_KEY} --source ${env.NUGET_SOURCE}
+      dotnet nuget push "${Env.STAGING_DIRECTORY}/nuget/${Env.PACKAGE_ID}.${Env.BUILD_VERSION}.nupkg" --api-key ${Env.API_KEY} --source ${Env.NUGET_SOURCE}
   env:
     STAGING_DIRECTORY: $(Build.ArtifactStagingDirectory)
     PACKAGE_ID: ${{ parameters.packageId }}

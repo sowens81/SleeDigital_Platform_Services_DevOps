@@ -27,7 +27,7 @@ steps:
   inputs:
     targetType: inline
     script: |
-      $tempVal=$env.BUILD_VERSION
+      $tempVal=$Env.BUILD_VERSION
       $buildVersion= $tempVal.Trim("release-v")
       echo "##vso[task.setvariable variable=buildVersionId]$buildVersion"
   env:
@@ -46,4 +46,4 @@ steps:
     command: 'pack'
     projects: "${{ parameters.solutionDirectory }}/${{ parameters.solutionName }}/${{ parameters.solutionName }}.csproj"
     arguments: "--configuration Release"
-    outputDir: '$(Build.ArtifactStagingDirectory)/nuget'
+    outputDir: "$(Build.ArtifactStagingDirectory)/nuget"
