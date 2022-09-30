@@ -7,7 +7,7 @@ trigger:
     - feature/*
   tags:
     include:
-    - 'release-v*'
+    - release-v*
 
 pr:
   branches:
