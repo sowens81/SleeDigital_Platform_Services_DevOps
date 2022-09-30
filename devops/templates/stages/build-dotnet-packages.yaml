@@ -25,6 +25,7 @@ stages:
         - template: ../steps/dotnet-framework.yaml
           parameters: 
             developmentFrameworkVersion: ${{ parameters.developmentFrameworkVersion }}
+
         - ${{ if and(ne(contains(variables['Build.SourceBranchName'],'refs/tags/v')), eq(variables['Build.Reason'], 'IndividualCI')) }}:
           - template: ../steps/dotnet-sonarcloud-prepare.yaml
             parameters: 
