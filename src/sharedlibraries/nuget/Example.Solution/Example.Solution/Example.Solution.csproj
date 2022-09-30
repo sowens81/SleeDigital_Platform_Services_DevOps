@@ -4,6 +4,11 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ProductId></ProductId>
+    <Version>0.0.0</Version>
+    <Authors>Steve Owens</Authors>
+    <Company>Slee Digital</Company>
   </PropertyGroup>
 
 </Project>
+
