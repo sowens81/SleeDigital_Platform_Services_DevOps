@@ -26,7 +26,7 @@ steps:
   displayName: Extract Build Id
   inputs:
     script: |
-      $buildVersion= $env.BUILD_VERSION.Trim("v")
+      $buildVersion= $env.BUILD_VERSION.Trim("release-v")
       echo "##vso[task.setvariable variable=buildVersionId]$buildVersion"
   env:
     BUILD_VERSION: $(Build.SourceBranchName)
