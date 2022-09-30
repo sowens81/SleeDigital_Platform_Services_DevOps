@@ -25,6 +25,7 @@ steps:
 - task: PowerShell@2
   displayName: Extract Build Id
   inputs:
+    targetType: inline
     script: |
       $buildVersion= $env.BUILD_VERSION.Trim("release-v")
       echo "##vso[task.setvariable variable=buildVersionId]$buildVersion"

@@ -9,6 +9,7 @@ steps:
 - task: PowerShell@2
   displayName: "Publish Nuget Package"
   inputs:
+    targetType: inline
     script: |
       dotnet nuget push "${env.STAGING_DIRECTORY}/nuget/${env.PACKAGE_ID}.${env.BUILD_VERSION}.nupkg" --api-key ${env.API_KEY} --source ${env.NUGET_SOURCE}
   env:
