@@ -27,7 +27,7 @@ steps:
   inputs:
     targetType: inline
     script: | 
-      $sourceBranchName=$(Build.SourceBranchName)
+      $sourceBranchName="$(Build.SourceBranchName)"
       $buildVersion=$sourceBranchName.Trim("release-v")
       echo "##vso[task.setvariable variable=buildVersionId]$buildVersion"
     
