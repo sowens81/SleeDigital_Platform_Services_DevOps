@@ -15,6 +15,14 @@ steps:
   env:
     BUILD_VERSION: $(Build.SourceBranchName)
 
-- script: |
-      dotnet nuget push "$(Build.ArtifactStagingDirectory)/nuget/${{ parameters.packageId }}.$(buildVersionId).nupkg" --api-key $(nugetApiKey) --source ${{ parameters.nugetSource }}
-  displayName: "Publish Nuget Package"    
+- task: PowerShell@2
+  displayName: "Publish Nuget Package"
+  inputs:
+    script: |
+      dotnet nuget push "${env.STAGING_DIRECTORY}/nuget/${env.PACKAGE_ID}.${env.BUILD_VERSION}.nupkg" --api-key ${env.API_KEY} --source ${env.NUGET_SOURCE}
+  env:
+    STAGING_DIRECTORY: $(Build.ArtifactStagingDirectory)
+    PACKAGE_ID: ${{ parameters.packageId }}
+    BUILD_VERSION: $(buildVersionId
+    API_KEY: $(nugetApiKey)
+    NUGET_SOURCE: ${{ parameters.nugetSource }}
